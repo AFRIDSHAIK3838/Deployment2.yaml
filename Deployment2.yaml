@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-java-app-deployment
+  labels:
+    app: my-java-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-java-app
+  template:
+    metadata:
+      labels:
+        app: my-java-app
+    spec:
+      containers:
+        - name: my-java-app-container
+          image: your-registry/your-java-app-image:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "64Mi"  # Corrected memory request format (e.g., MiB)
+              cpu: "250m"
+            limits:
+              memory: "128Mi"  # Corrected memory limit format (e.g., MiB)
+              cpu: "500m"
